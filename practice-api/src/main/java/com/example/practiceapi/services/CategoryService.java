@@ -25,7 +25,7 @@ public class CategoryService {
     }
 
     public CategoryBO getCategoryByName(String name) throws EntityNotFoundException {
-        return CategoryMapper.convertDEtoBO(repository.findByCategoryName(name)
+        return CategoryMapper.convertDEtoBO(repository.findByName(name)
                 .orElseThrow(() -> new EntityNotFoundException("Category with name: " + name + "does not exist.")));
 
     }

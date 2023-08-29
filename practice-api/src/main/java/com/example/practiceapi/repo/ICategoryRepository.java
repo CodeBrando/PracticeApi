@@ -9,6 +9,6 @@ public interface ICategoryRepository extends JpaRepository<CategoryDE, Long> {
 
     boolean existsByName(String categoryName);
 
-    Optional<CategoryDE> findByCategoryName(String categoryName);
+    Optional<CategoryDE> findByName(String categoryName);
 
 }
