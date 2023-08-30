@@ -32,6 +32,19 @@ public interface IProductController {
             @ApiResponse(responseCode = "404", description = "Not Found"),
             @ApiResponse(responseCode = "500", description = "Server error")
     })
+    @Operation(summary = "Assigns a category to a product")
+    @GetMapping(value = "/{productCode}{categoryName}", produces = APPLICATION_JSON)
+    ResponseEntity<?> assignCategory(@ApiParam(value = "Product code of the product to find")
+                                              @PathVariable("productCode") String productCode,
+                                     @ApiParam(value = "Category name of the category to find")
+                                     @PathVariable("categoryName") String categoryName);
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "500", description = "Server error")
+    })
     @Operation(summary = "Finds a product")
     @GetMapping(value = "/{productCode}", produces = APPLICATION_JSON)
     ResponseEntity<?> getProductByProductCode(@ApiParam(value = "Product code of the product to find")

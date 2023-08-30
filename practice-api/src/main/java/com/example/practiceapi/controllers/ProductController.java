@@ -43,6 +43,20 @@ public class ProductController implements IProductController{
     }
 
     @Override
+    public ResponseEntity<ResponseTO> assignCategory(String productCode, String categoryName){
+        log.info("STARTING TO ASSIGN CATEGORY...");
+        ResponseEntity<ResponseTO> response;
+        try{
+            apiService.assignCategory(productCode, categoryName);
+            response = new ResponseEntity<>(ResponseTO.builder().message(HttpStatus.OK.name()).build(), HttpStatus.OK);
+        } catch(EntityNotFoundException e){
+            log.error("SOMETHING HAS GONE WRONG WHILE ASSIGNING CATEGORY.");
+            response = new ResponseEntity<>(ResponseTO.builder().message(e.getMessage()).build(), HttpStatus.NOT_FOUND);
+        }
+        return response;
+    }
+
+    @Override
     public ResponseEntity<?> getProductByProductCode(String productCode){
         log.info("LOOKING FOR PRODUCT...");
         ResponseEntity<?> response;

@@ -25,6 +25,19 @@ public interface ICategoryController {
     ResponseEntity<ResponseTO> createCategory(@ApiParam(value = "Category to create", required = true)
                                              @Valid @RequestBody CategoryTO categoryTO);
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "400", description = "Bad Request"),
+            @ApiResponse(responseCode = "404", description = "Not Found"),
+            @ApiResponse(responseCode = "500", description = "Server error")
+    })
+    @Operation(summary = "Assigns a product to a category")
+    @GetMapping(value = "/{categoryName}{productCode}", produces = APPLICATION_JSON)
+    ResponseEntity<?> assignProduct(@ApiParam(value = "Category name of the category to find")
+                                     @PathVariable("categoryName") String categoryName,
+                                     @ApiParam(value = "Product code of the product to find")
+                                     @PathVariable("productCode") String productCode);
+
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "OK"),
